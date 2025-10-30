@@ -4,7 +4,7 @@ const produtoController = require('../controllers/produtoController');// Rota GE
 
 const { verificaToken } = require('../middlewares/authMiddleware');
 
-router.get('/produtos', produtoController.listarTodos);
+router.get('/', produtoController.listarTodos);
 router.get('/:id', produtoController.buscarporId);
 
 router.post('/', verificaToken, produtoController.criar);
