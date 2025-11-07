@@ -2,9 +2,22 @@ require('dotenv').config(); // Carrega as variáveis de ambiente do .env
 const express = require('express');
 const app = express();
 const PORTA = 3000;
+const sequelize = require('./database/database');
+const Produto = require('./models/produto');
 
 // Middleware para interpretar JSON
 app.use(express.json());
+
+
+async function syncDarabase() {
+  try {
+    await sequelize.authenticate();
+    console.log('Modelos sincronizados com o banco de dados.');
+  } catch (error) {
+    console.error('Erro ao sincronizar modelos', error);
+  }
+}
+syncDarabase();
 
 // Importamos o nosso arquivo de rotas de produtos
 const produtoRoutes = require('./routes/produtoRoutes');
